@@ -44,3 +44,10 @@ header nav * {
 .username {
   color: #d9d3c6;
 }
+
+.menu {
+  height: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

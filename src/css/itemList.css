@@ -1,0 +1,29 @@
+.odd {
+  background-color: #cccccc;
+}
+
+.even {
+  background-color: #aaaaaa;
+}
+
+.listItem {
+  color: #222222;
+  text-decoration: none;
+  width: max(80vw, min(90vw, 300px));
+  padding: 5px 10px;
+  font-size: 1.2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.listItem:hover,
+.listItem:focus-within {
+  background-color: rgb(0, 0, 0, 0.55);
+  color: wheat;
+}
+
+.moreOptions {
+  max-height: 30px;
+}

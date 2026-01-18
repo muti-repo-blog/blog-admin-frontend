@@ -1,4 +1,7 @@
-const Authorization = { "Authorization": `Bearer ${localStorage.getItem("token")}` }
+const Authorization = {
+  "Authorization": `Bearer ${localStorage.getItem("token")}`,
+  "Content-Type": "application/json",
+}
 
 const fetchPostCount = async () => {
   return fetch(`${import.meta.env.VITE_BASE_URL}/posts/count`, {
@@ -40,6 +43,16 @@ const loginAdmin = async (username, password, adminPassword) => {
   });
 }
 
+const fetchAllComments = async (id) => {
+  return fetch(`${import.meta.env.VITE_BASE_URL}/posts/${id}/comments`, {
+    headers: {
+      "Authorization": `Bearer ${localStorage.getItem("token")}`
+    }
+  })
+    .then((response) => response.json())
+    .catch((error) => console.error(error))
+}
+
 const deletePost = async (id) => {
   return fetch(`${import.meta.env.VITE_BASE_URL}/posts/${id}`, {
     headers: Authorization,
@@ -50,13 +63,52 @@ const deletePost = async (id) => {
 }
 
 const createPost = async (title, postContent, authorId, isPublished) => {
-  console.log("Creating post with:", { title, postContent, authorId, isPublished });
   return fetch(`${import.meta.env.VITE_BASE_URL}/posts`, {
     headers: Authorization,
     method: "POST",
     body: JSON.stringify({ title, postContent, authorId, isPublished }),
   })
     .then((response) => response.json())
+    .catch((error) => console.error(error))
+}
+
+const createComment = async (commentContent, authorId, id) => {
+  return fetch(`${import.meta.env.VITE_BASE_URL}/posts/${id}/comments`, {
+    headers: Authorization,
+    method: "POST",
+    body: JSON.stringify({ commentContent, authorId }),
+  })
+    .then((response) => response.json())
+    .catch((error) => console.error(error))
+}
+
+const deleteComment = async (postId, commentId) => {
+  return fetch(`${import.meta.env.VITE_BASE_URL}/posts/${postId}/comments/${commentId}`, {
+    headers: Authorization,
+    method: "DELETE",
+  })
+    .then((response) => response.json())
+    .catch((error) => console.error(error))
+}
+
+const togglePostPublished = async (id, publishedStatus) => {
+  return fetch(`${import.meta.env.VITE_BASE_URL}/posts/${id}/publish`, {
+    headers: Authorization,
+    method: "PATCH",
+    body: JSON.stringify({ publishedStatus }),
+  })
+    .then((response) => response.json())
+    .catch((error) => console.error(error))
+}
+
+const updatePost = async (id, title, postContent, isPublished) => {
+  return fetch(`${import.meta.env.VITE_BASE_URL}/posts/${id}/edit`, {
+    headers: Authorization,
+    method: "PATCH",
+    body: JSON.stringify({ title, postContent, isPublished }),
+  })
+    .then((response) => response.json())
+    .catch((error) => console.error(error))
 }
 
 
@@ -68,4 +120,9 @@ export {
   loginAdmin,
   fetchPost,
   createPost,
+  fetchAllComments,
+  createComment,
+  deleteComment,
+  togglePostPublished,
+  updatePost
 }

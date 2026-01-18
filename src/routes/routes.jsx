@@ -6,6 +6,8 @@ import { useAuth } from "../components/AuthContext";
 import NewPost from "../pages/NewPost";
 import Posts from "../pages/Posts";
 import Post from "../pages/Post";
+import EditPost from "../pages/EditPost";
+import Users from "../pages/Users";
 
 function ProtectedRoute() {
   const { isAuthenticated, loading } = useAuth();
@@ -33,8 +35,10 @@ const routes = [
     children: [
       { path: "/", element: <App /> },
       { path: "/posts", element: <Posts /> },
+      { path: "/users", element: <Users /> },
       { path: "/posts/new", element: <NewPost /> },
       { path: "/posts/:id", element: <Post /> },
+      { path: "/posts/:id/edit", element: <EditPost /> },
     ],
   },
 ]

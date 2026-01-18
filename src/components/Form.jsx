@@ -66,7 +66,7 @@ const Form = (props) => {
         }
 
         <div className="submitButtonBox">
-          <button type="submit">{isLoginForm ? "Log In" : "Sign Up"}</button>
+          <button className="defaultBtn" type="submit">{isLoginForm ? "Log In" : "Sign Up"}</button>
         </div>
       </form>
       <div className="noAccountBox">

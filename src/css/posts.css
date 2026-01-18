@@ -7,80 +7,16 @@
   cursor: pointer;
 }
 
-.post {
-  background-color: gray;
-  color: #222222;
-  text-decoration: none;
-  width: max(80vw, min(90vw, 300px));
-  padding: 5px 10px;
-  font-size: 1.2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-}
-
-.fixed {
-  position: absolute;
-  top: 0;
-  right: 0;
-  z-index: 5;
-  background-color: white;
-  border-radius: 10px;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-}
-
-.fixed * {
-  box-sizing: border-box;
-  flex: 1;
-  color: black;
+.singlePost {
+  width: max(70vw, min(90vw, 300px));
+  background-color: #C4BFB5;
+  padding: 20px;
+  min-height: 20vh;
+  border-radius: 2px;
+  line-height: 1.5;
   font-size: large;
-  text-decoration: none;
-  width: 100%;
-  padding: 2px;
-  border-radius: 3px;
-  padding: 3px 6px;
-}
-
-.fixed .delete {
-  background-color: rgba(239, 68, 68, 0.5);
-}
-
-.fixed *:not(.delete):hover,
-.fixed *:not(.delete):focus {
-  background-color: rgb(0 0 0 / 0.2);
-}
-
-.fixed .delete:hover,
-.fixed .delete:focus {
-  background-color: rgba(239, 68, 68, 0.7);
-}
-
-.fixed .delete:active {
-  background-color: #b91c1c; /* pressed */
-}
-
-
-.moreForPost {
-  max-height: 30px;
-}
-
-
-.odd {
-  background-color: #cccccc;
-}
-
-.even {
-  background-color: #aaaaaa;
-}
-
-.post:hover,
-.post:focus-within {
-  background-color: rgb(0, 0, 0, 0.55);
-  color: wheat;
+  margin-bottom: 30px;
+  margin-top: 10px;
 }
 
 .paganation {
@@ -106,18 +42,91 @@
   aspect-ratio: 1;
   border: none;
   cursor: pointer;
+  background-color: rgb(0, 0, 0, 0.2);
 }
 
 .pageArrowButton:hover,
 .pageArrowButton:focus {
-  background-color: rgb(0, 0, 0, 0.3);
+  background-color: rgb(0, 0, 0, 0.4);
 }
 
 .pageArrowButton:active {
-  background-color: rgb(0, 0, 0, .5);
+  background-color: rgb(0, 0, 0, 0.1);
 }
 
 .pageArrowButton:disabled {
   cursor: not-allowed;
   background-color: gainsboro;
+}
+
+.comment {
+  width: max(70vw, min(90vw, 300px));
+  background-color: #C4BFB5;
+  padding: 20px;
+}
+
+.commentTop {
+  width: max(70vw, min(90vw, 300px));
+  text-align: center;
+}
+
+.commentTop hr {
+  height: 5px;
+  background-color: gray;
+  border-radius: 20px;
+  border: none;
+}
+
+.flexRowSpaceBetween {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flexRowSpaceBetween .trashCan {
+  width: 3em;
+  height: 3em;
+  padding: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flexRowSpaceBetween .trashCan:hover,
+.flexRowSpaceBetween .trashCan:focus {
+  background-color: rgba(255, 0, 0, 0.2);
+}
+
+.trashCan img {
+  max-width: 60%;
+  max-height: 60%;
+}
+
+.postDetails {
+  color: #333333;
+  width: 95%;
+}
+
+.postContainer {
+  width: max(70vw, min(90vw, 300px));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.TinymceContainer {
+  width: 90%;
+  display: flex;
+  align-items: start;
+  flex-direction: column;
+}
+
+.fontSizeSmall {
+  font-size: small;
+  font-style: italic;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
 }

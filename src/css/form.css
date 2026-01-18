@@ -33,21 +33,22 @@ form input {
 
 .submitButtonBox {
   display: flex;
-  justify-content: center;
+  justify-content: start;
   margin-top: 10px;
 }
 
-.submitButtonBox button {
+.defaultBtn {
   background-color: #2F362F;
   padding: 6px 20px;
   color: #D9D3C6;
   font-size: large;
   border: none;
   border-radius: 4px;
+  cursor: pointer;
 }
 
-.submitButtonBox button:hover,
-.submitButtonBox button:focus {
+.defaultBtn:hover,
+.defaultBtn:focus {
   background-color: #4A524A;
 }
 

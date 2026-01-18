@@ -5,7 +5,7 @@ import ItemList from "../components/ItemList";
 import { fetchAllPosts } from "../logic/fetch";
 import { deletePost } from "../logic/fetch";
 
-const Posts = () => {
+const Users = () => {
   const [data, setData] = useState(null);
   const [page, setPage] = useState(1)
   const [loading, setLoading] = useState(true)
@@ -76,4 +76,4 @@ const Posts = () => {
 
 };
 
-export default Posts;
+export default Users;

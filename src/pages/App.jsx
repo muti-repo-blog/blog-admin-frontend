@@ -12,11 +12,11 @@ const App = () => {
   useEffect(() => {
     const load = async () => {
       setLoading(true)
-        const postCount = await fetchPostCount()
-        const userCount = await fetchUserCount()
+      const postCount = await fetchPostCount()
+      const userCount = await fetchUserCount()
 
-        setPostCount(postCount)
-        setUserCount(userCount.numberOfUsers)
+      setPostCount(postCount)
+      setUserCount(userCount.numberOfUsers)
       setLoading(false)
     }
 
@@ -39,19 +39,25 @@ const App = () => {
 
       <div className='info'>
         {postCount && !loading &&
-          <InfoCard title="Posts" info={
-            <>
-              <div>Number of posts {postCount.numberOfPosts}</div>
-              <div>Number of published posts {postCount.numberOfPublishedPosts}</div>
-            </>
-          } />
+          <InfoCard
+            title="Posts"
+            herf="/posts"
+            info={
+              <>
+                <div>Number of posts {postCount.numberOfPosts}</div>
+                <div>Number of published posts {postCount.numberOfPublishedPosts}</div>
+              </>
+            } />
         }
         {userCount && !loading &&
-          <InfoCard title="Users" info={
-            <>
-              <div>Number of users {userCount}</div>
-            </>
-          } />
+          <InfoCard
+            title="Users"
+            herf="/users"
+            info={
+              <>
+                <div>Number of users {userCount}</div>
+              </>
+            } />
         }
       </div>
     </>

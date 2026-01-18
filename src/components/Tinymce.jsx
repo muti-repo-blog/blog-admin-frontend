@@ -1,16 +1,16 @@
 import { Editor } from '@tinymce/tinymce-react';
 import '../css/tinymce.css';
 
-export default function Tinymce(props) {
-
+export default function Tinymce({ value, onChange, height, placeholder }) {
   return (
-    <div className='editor-wrapper'>
+    <div className="editor-wrapper">
       <Editor
         apiKey={import.meta.env.VITE_TINYMCE_API_KEY}
-        onInit={(evt, editor) => (props.editorRef.current = editor)}
+        value={value}
+        onEditorChange={onChange}
         init={{
-          placeholder: 'Your Content Here...',
-          height: '50vh',
+          placeholder: placeholder || "Start typing here...",
+          height: height || 500,
           menubar: false,
           plugins:
             "advlist autolink lists link image charmap preview anchor " +
@@ -25,6 +25,5 @@ export default function Tinymce(props) {
         }}
       />
     </div>
-
   );
 }
