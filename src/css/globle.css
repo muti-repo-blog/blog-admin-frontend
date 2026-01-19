@@ -173,3 +173,29 @@ footer {
   justify-content: center;
   align-items: center;
 }
+
+.notFoundWrapper {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.home-btn {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 12px 20px;
+  background-color: #2f362f;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: background-color 0.15s ease, transform 0.05s ease;
+}
+
+.home-btn:hover,
+.home-btn:focus {
+  background-color: #3b453b;
+}
+
+.home-btn:active {
+  transform: translateY(1px);
+}

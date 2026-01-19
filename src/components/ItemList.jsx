@@ -30,6 +30,7 @@ const ItemList = (props) => {
           className="moreOptions"
           src="/assets/more.svg"
           alt="More options"
+          onClick={() => setDotsClicked(true)}
         />
 
         {dotsClicked && (

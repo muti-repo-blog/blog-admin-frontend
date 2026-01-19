@@ -89,7 +89,6 @@ const Header = ({ links }) => {
           >
             {dotsClicked ? (
               <Dropdown
-                hasDelete={false}
                 links={menuLinks}
               />
             ) : (

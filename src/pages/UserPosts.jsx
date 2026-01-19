@@ -2,26 +2,28 @@ import { useEffect, useState } from "react";
 import Header from "../components/Header";
 import "../css/posts.css"
 import ItemList from "../components/ItemList";
-import { fetchAllUsers, deleteUser } from "../logic/fetch";
+import { fetchUserPosts, deletePost } from "../logic/fetch";
+import { useParams } from "react-router";
 
-const Users = () => {
+const UserPosts = () => {
   const [data, setData] = useState(null);
   const [page, setPage] = useState(1)
   const [loading, setLoading] = useState(true)
-  const [refreshUsers] = useState(false)
+  const [refreshPosts, setRefreshPosts] = useState(false)
+  const { id } = useParams();
 
   useEffect(() => {
     const load = async () => {
       setLoading(true)
-      const users = await fetchAllUsers(page)
-      setData(users)
+      const posts = await fetchUserPosts(id, page)
+      setData(posts)
 
       setLoading(false)
     }
 
     load()
 
-  }, [page, refreshUsers]);
+  }, [page, refreshPosts]);
 
 
   return (
@@ -30,24 +32,24 @@ const Users = () => {
         links={[
           { id: 1, title: "Home", href: "/" },
           { id: 2, title: "New Post", href: "/posts/new" },
-          { id: 3, title: "Veiw Posts", href: "/posts" },
+          { id: 3, title: "Veiw Users", href: "/users" },
         ]}
       />
       {loading && <h1>Loading...</h1>}
       <div className="posts">
-        {data && !loading && data.users.map((user, index) => (
+        {data && !loading && data.posts.map((post, index) => (
           <ItemList
-            key={user.id}
-            title={user.username}
+            key={post.id}
+            title={post.title}
             index={index}
-            deleteListItem={() => deleteUser(user.id)}
             dropdownLinks={[
-              { id: 1, href: `/posts/users/${user.id}`, title: "View Users Posts" },
+              { id: 1, href: `/posts/${post.id}`, title: "View" },
+              { id: 2, href: `/posts/${post.id}/edit`, title: "Edit" },
               {
                 id: 3,
                 action: async () => {
-                  await deleteUser(user.id)
-                  setRefreshUsers(!refreshUsers)
+                  await deletePost(post.id)
+                  setRefreshPosts(!refreshPosts)
                 },
                 title: "Delete",
                 className: "delete"
@@ -78,4 +80,4 @@ const Users = () => {
 
 };
 
-export default Users;
+export default UserPosts

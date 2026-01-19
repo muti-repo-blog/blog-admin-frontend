@@ -128,6 +128,13 @@ const deleteUser = async (id) => {
     .catch((error) => console.error(error))
 }
 
+const fetchUserPosts = async (userId, page) => {
+  return fetch(`${import.meta.env.VITE_BASE_URL}/posts/users/${userId}?page=${page}`, {
+    headers: Authorization
+  })
+    .then(response => response.json())
+    .catch((error) => console.error(error))
+}
 
 export {
   fetchPostCount,
@@ -144,4 +151,5 @@ export {
   updatePost,
   fetchAllUsers,
   deleteUser,
+  fetchUserPosts,
 }
