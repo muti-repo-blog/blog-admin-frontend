@@ -111,6 +111,23 @@ const updatePost = async (id, title, postContent, isPublished) => {
     .catch((error) => console.error(error))
 }
 
+const fetchAllUsers = async (page) => {
+  return fetch(`${import.meta.env.VITE_BASE_URL}/users?page=${page}`, {
+    headers: Authorization
+  })
+    .then(response => response.json())
+    .catch((error) => console.error(error))
+}
+
+const deleteUser = async (id) => {
+  return fetch(`${import.meta.env.VITE_BASE_URL}/users/${id}`, {
+    headers: Authorization,
+    method: "DELETE",
+  })
+    .then(response => response.json())
+    .catch((error) => console.error(error))
+}
+
 
 export {
   fetchPostCount,
@@ -124,5 +141,7 @@ export {
   createComment,
   deleteComment,
   togglePostPublished,
-  updatePost
+  updatePost,
+  fetchAllUsers,
+  deleteUser,
 }

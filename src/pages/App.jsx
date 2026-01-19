@@ -3,11 +3,13 @@ import "../css/globle.css"
 import Header from '../components/Header';
 import InfoCard from '../components/InfoCard';
 import { fetchPostCount, fetchUserCount } from '../logic/fetch';
+import { useAuth } from '../components/AuthContext';
 
 const App = () => {
   const [postCount, setPostCount] = useState(null)
   const [userCount, setUserCount] = useState(null)
   const [loading, setLoading] = useState(true)
+  const { isAuthenticated } = useAuth();
 
   useEffect(() => {
     const load = async () => {
@@ -21,15 +23,15 @@ const App = () => {
     }
 
     load()
-  }, [])
+  }, [isAuthenticated])
 
 
   return (
     <>
       <Header links={[
-        { id: 1, text: "New Post", href: "/posts/new" },
-        { id: 2, text: "Veiw Posts", href: "/posts" },
-        { id: 3, text: "Veiw Users", href: "/users" },
+        { id: 1, title: "New Post", href: "/posts/new" },
+        { id: 2, title: "View Posts", href: "/posts" },
+        { id: 3, title: "View Users", href: "/users" },
       ]} />
 
       <div className="outline">

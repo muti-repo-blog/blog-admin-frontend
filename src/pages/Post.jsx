@@ -60,9 +60,9 @@ const Post = () => {
     <>
       <Header
         links={[
-          { id: 1, text: "Home", href: "/" },
-          { id: 2, text: "View Posts", href: "/posts" },
-          { id: 3, text: "View Users", href: "/users" },
+          { id: 1, title: "Home", href: "/" },
+          { id: 2, title: "View Posts", href: "/posts" },
+          { id: 3, title: "View Users", href: "/users" },
         ]}
       />
       {postLoading && <h1>Loading...</h1>}

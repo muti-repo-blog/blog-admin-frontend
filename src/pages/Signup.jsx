@@ -71,7 +71,7 @@ const Signup = () => {
     <>
       <Header
         links={[
-          { id: 1, text: "Home", href: "/" },
+          { id: 1, title: "Home", href: "/" },
         ]}
       />
       <FormLogic />

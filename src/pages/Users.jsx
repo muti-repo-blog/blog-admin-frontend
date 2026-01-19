@@ -2,54 +2,58 @@ import { useEffect, useState } from "react";
 import Header from "../components/Header";
 import "../css/posts.css"
 import ItemList from "../components/ItemList";
-import { fetchAllPosts } from "../logic/fetch";
-import { deletePost } from "../logic/fetch";
+import { fetchAllUsers } from "../logic/fetch";
+import { deleteUser } from "../logic/fetch";
 
 const Users = () => {
   const [data, setData] = useState(null);
   const [page, setPage] = useState(1)
   const [loading, setLoading] = useState(true)
-  const [postsOnChange, setPostsOnChange] = useState(false)
-  const [isAdmin, setIsAdmin] = useState(true)
+  const [refreshUsers, setRefreshUsers] = useState(false)
 
   useEffect(() => {
     const load = async () => {
       setLoading(true)
-      const posts = await fetchAllPosts(page, isAdmin)
-      console.log(posts)
-
-      setData(posts)
+      const users = await fetchAllUsers(page)
+      setData(users)
 
       setLoading(false)
     }
 
     load()
 
-  }, [page, postsOnChange]);
+  }, [page, refreshUsers]);
 
 
   return (
     <>
       <Header
         links={[
-          { id: 1, text: "Home", href: "/" },
-          { id: 2, text: "New Post", href: "/posts/new" },
-          { id: 3, text: "Veiw Users", href: "/users" },
+          { id: 1, title: "Home", href: "/" },
+          { id: 2, title: "New Post", href: "/posts/new" },
+          { id: 3, title: "Veiw Posts", href: "/posts" },
         ]}
       />
       {loading && <h1>Loading...</h1>}
       <div className="posts">
-        {data && !loading && data.posts.map((post, index) => (
+        {data && !loading && data.users.map((user, index) => (
           <ItemList
-            setListItemObj={setPostsOnChange}
-            listItemObj={postsOnChange}
-            key={post.id}
-            item={post}
+            key={user.id}
+            title={user.username}
             index={index}
-            deleteListItem={deletePost}
+            deleteListItem={() => deleteUser(user.id)}
             dropdownLinks={[
-              { id: 1, path: `/posts/${post.id}`, label: "View" },
-              { id: 2, path: `/posts/${post.id}/edit`, label: "Edit" },
+              { id: 1, href: `/posts/user/${user.id}`, title: "View Users Posts" },
+              { id: 2, href: `/posts/user/${user.id}/comments`, title: "View Users Comments" },
+              {
+                id: 3,
+                action: async () => {
+                  await deleteUser(user.id)
+                  setRefreshUsers(!refreshUsers)
+                },
+                title: "Delete",
+                className: "delete"
+              },
             ]}
           />
         ))}

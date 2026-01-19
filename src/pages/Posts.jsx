@@ -9,15 +9,12 @@ const Posts = () => {
   const [data, setData] = useState(null);
   const [page, setPage] = useState(1)
   const [loading, setLoading] = useState(true)
-  const [postsOnChange, setPostsOnChange] = useState(false)
-  const [isAdmin, setIsAdmin] = useState(true)
+  const [refreshPosts, setRefreshPosts] = useState(false)
 
   useEffect(() => {
     const load = async () => {
       setLoading(true)
-      const posts = await fetchAllPosts(page, isAdmin)
-      console.log(posts)
-
+      const posts = await fetchAllPosts(page, true)
       setData(posts)
 
       setLoading(false)
@@ -25,31 +22,37 @@ const Posts = () => {
 
     load()
 
-  }, [page, postsOnChange]);
+  }, [page, refreshPosts]);
 
 
   return (
     <>
       <Header
         links={[
-          { id: 1, text: "Home", href: "/" },
-          { id: 2, text: "New Post", href: "/posts/new" },
-          { id: 3, text: "Veiw Users", href: "/users" },
+          { id: 1, title: "Home", href: "/" },
+          { id: 2, title: "New Post", href: "/posts/new" },
+          { id: 3, title: "Veiw Users", href: "/users" },
         ]}
       />
       {loading && <h1>Loading...</h1>}
       <div className="posts">
         {data && !loading && data.posts.map((post, index) => (
           <ItemList
-            setListItemObj={setPostsOnChange}
-            listItemObj={postsOnChange}
             key={post.id}
-            item={post}
+            title={post.title}
             index={index}
-            deleteListItem={deletePost}
             dropdownLinks={[
-              { id: 1, path: `/posts/${post.id}`, label: "View" },
-              { id: 2, path: `/posts/${post.id}/edit`, label: "Edit" },
+              { id: 1, href: `/posts/${post.id}`, title: "View" },
+              { id: 2, href: `/posts/${post.id}/edit`, title: "Edit" },
+              {
+                id: 3,
+                action: async () => {
+                  await deletePost(post.id)
+                  setRefreshPosts(!refreshPosts)
+                },
+                title: "Delete",
+                className: "delete"
+              },
             ]}
           />
         ))}

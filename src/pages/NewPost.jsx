@@ -35,9 +35,9 @@ const NewPost = () => {
     <>
 
       <Header links={[
-        { id: 1, text: "Home", href: "/" },
-        { id: 2, text: "Veiw Posts", href: "/posts" },
-        { id: 3, text: "Veiw Users", href: "/users" },
+        { id: 1, title: "Home", href: "/" },
+        { id: 2, title: "Veiw Posts", href: "/posts" },
+        { id: 3, title: "Veiw Users", href: "/users" },
       ]} />
 
       <form onSubmit={handleSubmit}>

@@ -13,7 +13,7 @@ function useIsSmall(breakpoint = 768) {
     return () => window.removeEventListener("resize", onResize);
   }, [breakpoint]);
 
-  return !isSmall;
+  return isSmall;
 }
 
 const Header = ({ links }) => {
@@ -21,11 +21,22 @@ const Header = ({ links }) => {
   const isSmall = useIsSmall();
   const [dotsClicked, setDotsClicked] = useState(false);
 
-  const dropdownLinks = links.map(l => ({
-    id: l.id,
-    path: l.href,
-    label: l.text,
-  }));
+  const menuLinks = [...links];
+  if (isSmall) {
+    if (!isAuthenticated) {
+      menuLinks.push({
+        id: "login",
+        href: "/login",
+        title: "Log In",
+      });
+    } else {
+      menuLinks.push({
+        id: "logout",
+        title: "Log Out",
+        action: () => logout(),
+      });
+    }
+  }
 
   return (
     <header>
@@ -37,7 +48,7 @@ const Header = ({ links }) => {
             <div className="links">
               {links.map(link => (
                 <Link className="link" key={`link-${link.id}`} to={link.href}>
-                  {link.text}
+                  {link.title}
                 </Link>
               ))}
 
@@ -79,7 +90,7 @@ const Header = ({ links }) => {
             {dotsClicked ? (
               <Dropdown
                 hasDelete={false}
-                links={dropdownLinks}
+                links={menuLinks}
               />
             ) : (
               <div tabIndex={0}>
